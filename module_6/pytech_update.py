@@ -12,6 +12,8 @@ client= MongoClient(url)
 db=client.pytech 
 students= db.students
 
+
+'''Initial output to compare to changes'''
 all_students= db.students.find()
 print(" -- DISPLAYING STUDENTS DOCUMENTS FROM find() QUERY -- ")
 for student in all_students:
