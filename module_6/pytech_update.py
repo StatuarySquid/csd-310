@@ -12,11 +12,16 @@ client= MongoClient(url)
 db=client.pytech 
 students= db.students
 
+all_students= db.students.find()
+print(" -- DISPLAYING STUDENTS DOCUMENTS FROM find() QUERY -- ")
+for student in all_students:
+    output_student(student)
 
-results= students.update_one({'student_id':1007}, {"$set":{'last_name':'Rodriguez'}})
+results= students.update_one({'student_id':1007}, {"$set":{'last_name':'Change'}})
 find_student= students.find_one({'student_id':1007})
 
 all_students= db.students.find()
+
 print(" -- DISPLAYING STUDENTS DOCUMENTS FROM find() QUERY -- ")
 for student in all_students:
     output_student(student)
