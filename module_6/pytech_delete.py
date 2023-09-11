@@ -26,11 +26,15 @@ jack ={
    'last_name' : 'Delete'
 }
 
-new_jack_id= students.insert_one(jack).inserted_id
+new_jack_id= str(students.insert_one(jack).inserted_id)
 
 
 '''find_one() method to display database '''
 find_student= students.find_one({"student_id":1010})
+
+print("-- INSERT STATEMENTS --")
+print("Inserted student record into the student collection with document_id "  + new_jack_id)
+print("")
 
 print(" -- DISPLAYING STUDENT TEST DOC -- ")
 output_student(find_student)
