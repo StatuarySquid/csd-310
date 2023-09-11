@@ -46,3 +46,4 @@ all_students= db.students.find()
 print(" -- DISPLAYING STUDENTS DOCUMENTS FROM find() QUERY -- ")
 for student in all_students:
     output_student(student)
+input('End of program, press any key to exit...')
