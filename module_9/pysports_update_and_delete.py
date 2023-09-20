@@ -6,8 +6,11 @@ user='root2',
 passwd='cybr41018!',
 db='pysports')
 
-def display_results(x):
+cursor = connection.cursor()
 
+
+def display_results(x):
+    
     for x in rows:  
         print('Player ID: {}'.format(x[0]))
         print('First Name: {}'.format(x[1]))
@@ -16,7 +19,7 @@ def display_results(x):
         print()
     
 '''INNER JOIN FOR CORRECT FORMAT'''
-cursor = connection.cursor()
+
 query="SELECT player.player_id, player.first_name, player.last_name, team.team_name FROM player INNER JOIN team ON player.team_id=team.team_id"
 
 cursor.execute(query)
