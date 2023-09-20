@@ -7,6 +7,7 @@ passwd='cybr41018!',
 db='pysports')
 
 def display_results(x):
+
     for x in rows:  
         print('Player ID: {}'.format(x[0]))
         print('First Name: {}'.format(x[1]))
@@ -25,7 +26,8 @@ rows=cursor.fetchall()
 '''INSERT NEW PLAYER'''
 insert_sql = "INSERT INTO player (player_id, first_name, last_name, team_id) VALUES (%s, %s, %s, %s)"
 new_player= ("021", "Smeagol", "Shire Folk", "1")
-
+cursor.execute(insert_sql,new_player)
+connection.commit()
 
 print('--DISPLAYING PLAYERS AFTER INSERT--')
 display_results(insert_sql)
