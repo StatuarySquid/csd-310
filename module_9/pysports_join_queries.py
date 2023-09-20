@@ -6,7 +6,7 @@ user='root2',
 passwd='cybr41018!',
 db='pysports')
 
-cursor= connection.cursor()
+
 
 
 cursor = connection.cursor()
