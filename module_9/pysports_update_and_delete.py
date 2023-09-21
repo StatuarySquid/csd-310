@@ -9,7 +9,7 @@ db='pysports')
 cursor = connection.cursor()
 
 
-def display_results(query):
+def display_results( ):
     query="SELECT player.player_id, player.first_name, player.last_name, team.team_name FROM player INNER JOIN team ON player.team_id=team.team_id"
     cursor.execute(query)
     rows=cursor.fetchall()
@@ -28,7 +28,7 @@ cursor.execute(insert_sql,new_player)
 
 
 print('--DISPLAYING PLAYERS AFTER INSERT--')
-display_results(insert_sql)
+display_results()
 
 
 '''UPDATE PLAYER''' 
@@ -38,7 +38,7 @@ update_sql= "UPDATE player SET player_id= '21',first_name='Gollum', last_name='R
 
 cursor.execute(update_sql)
 
-display_results(update_sql)
+display_results()
 
 '''DELETE PLAYER'''
 
@@ -47,7 +47,7 @@ delete_player= "DELETE FROM player WHERE first_name='Gollum'"
 
 cursor.execute(delete_player)
 
-display_results(delete_player)
+display_results()
 
 
 connection.close()
