@@ -27,7 +27,10 @@ FROM book
 WHERE book_id NOT IN (SELECT book_id FROM wishlist WHERE user_id = 1);
 
 /*
-    Insert book into wishlist. AUTO INCREMENT BUT IT IS STILL ASKING FOR DEFAULT VALUE
+    Insert book into wishlist. 
+    AUTO INCREMENT BUT IT IS STILL ASKING FOR WISHLIST DEFAULT VALUE
+    HAD TO PUT THE WISHLIST_ID TO MAKE IT WORK
+
 */
 INSERT INTO wishlist(wishlist_id, user_id, book_id)
     VALUES(5, 1, 9)
