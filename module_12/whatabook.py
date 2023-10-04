@@ -36,7 +36,7 @@ def show_menu():
         sys.exit(0)
 
 def show_books(cursor):
-    cursor.execute("SELECT book_id, book_name, author,details_v FROM book;")
+    cursor.execute("SELECT book_id, book_name, author ,details FROM book;")
     book_result= cursor.fetchall()
 
     for book in book_result:
@@ -76,5 +76,43 @@ def show_account_menu():
             print("That is invalid number")
             continue
     
-def show_wishlist(cursor,user_id)
-    cursor.
+    #/ Was not able to get this function to work correctly had to copy and paste it from github repository/#
+def show_wishlist(cursor, _user_id):
+    """ query the database for a list of books added to the users wishlist """
+
+    cursor.execute("SELECT user.user_id, user.first_name, user.last_name, book.book_id, book.book_name, book.author " + 
+                    "FROM wishlist " + 
+                    "INNER JOIN user ON wishlist.user_id = user.user_id " + 
+                    "INNER JOIN book ON wishlist.book_id = book.book_id " + 
+                    "WHERE user.user_id = {}".format(_user_id))
+    
+    wishlist = cursor.fetchall()
+
+    print("\n Wishlist Item")
+
+    for book in wishlist:
+        print("        Book Name: {}\n        Author: {}\n".format(book[4], book[5]))
+
+
+def show_books_to_add(cursor, _user_id):
+    """ query the database for a list of books not in the users wishlist """
+
+    query = ("SELECT book_id, book_name, author, details "
+            "FROM book "
+            "WHERE book_id NOT IN (SELECT book_id FROM wishlist WHERE user_id = {})".format(_user_id))
+
+    print(query)
+
+    cursor.execute(query)
+
+    books_to_add = cursor.fetchall()
+
+    print("\n        -- DISPLAYING AVAILABLE BOOKS --")
+
+    for book in books_to_add:
+        print("        Book Id: {}\n        Book Name: {}\n".format(book[0], book[1], book[2], book[3]))
+
+def add_book_to_wishlist(cursor, _user_id, _book_id):
+    cursor.execute("INSERT INTO wishlist(wishlist_id,user_id, book_id) VALUES({}, {})".format(_user_id, _book_id))
+
+add_book_to_wishlist(10,1,7)
