@@ -36,6 +36,7 @@ def show_books(_cursor):
     for book in book_result:
         print("  Book Name: {}\n  Author: {}\n  Details: {}\n".format(book[0], book[1], book[2]))
         
+    
 #\show_location display the location address
 def show_locations(_cursor):
     _cursor.execute("Select store_id,locale from store;")
@@ -43,7 +44,7 @@ def show_locations(_cursor):
     for store in store_result:
         print('Store Location:{}'.format(store[1]))
         
-        sys.exit(0)
+        
     
 #\validate_user is supposed to validate the user's identity since the are only three user id 1-3
 def validate_user(): 
@@ -91,7 +92,7 @@ def show_wishlist(_cursor, _user_id):
 
     for book in wishlist:
         print("        Book Name: {}\n        Author: {}\n".format(book[4], book[5]))
-
+    
 #\ show books not in a user's wishlist
 def show_books_to_add(_cursor, _user_id):
     """ query the database for a list of books not in the users wishlist """
@@ -125,11 +126,13 @@ db = mysql.connector.connect(
 
 cursor = db.cursor() # cursor for MySQL queries
 
-print("\n  Welcome to the WhatABook Application! ")
+print("Welcome to the WhatABook Application! ")
+print("Input 4 to exit")
 
-user_input= show_menu()
+user_input=0
 
 while user_input !=4:
+    user_input= show_menu()
     if user_input == 1:
         show_locations(cursor)
 #\When the show_books(cursor) runs it goes in an infinite loop.... 
@@ -138,15 +141,16 @@ while user_input !=4:
 
     if user_input == 3:
         input_user_id= validate_user()
-        account_option= show_account_menu()
+        account_option=0
 
-        while input_user_id !=3:
-
-            if input_user_id == 1: 
+        while account_option !=3:
+            
+            account_option= show_account_menu()
+            if account_option == 1: 
                 show_wishlist(cursor,input_user_id)
 #/ show_wishlist ask to add a book when it should just show the what is in the wishlist 
             
-            if input_user_id == 2: 
+            if account_option == 2: 
                 show_books_to_add(cursor,input_user_id)
                 book_id= int(input('\n Enter the ID of the book you want to add: '))
                 add_book_to_wishlist(cursor,input_user_id,book_id)
@@ -154,8 +158,8 @@ while user_input !=4:
                 db.commit()
 
                 print('\n Book ID: {} was added to your wishlist'.format(book_id))
-            if input_user_id < 0 or input_user_id >3:
+            if account_option < 0 or account_option >3:
                 print ('\n Invalid input, try again')
             
 
-        print('Program terminated')         
+print('Program terminated')         
