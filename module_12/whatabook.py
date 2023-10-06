@@ -15,8 +15,9 @@ _cursor=my_db.cursor()
 #\ show_menu()- display menu and ask which menu to go next
 
 def show_menu():
-    print("\n Welcome to our menu")
-    print(" \n 1. Store Locations \n 2. View Books \n 3. My account"
+    print("\n Welcome to WhatABook menu!!")
+    
+    print(" \n 1. Store Locations \n 2. View Books \n 3. My account \n 4. Exit"
     )
 
     try:
@@ -26,7 +27,7 @@ def show_menu():
     except ValueError:
         print("Invalid input")
         
-        sys.exit(0)
+        
 
 #\show_books is supposed to display all 9 books 
 def show_books(_cursor):
@@ -126,8 +127,7 @@ db = mysql.connector.connect(
 
 cursor = db.cursor() # cursor for MySQL queries
 
-print("Welcome to the WhatABook Application! ")
-print("Input 4 to exit")
+
 
 user_input=0
 
